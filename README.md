@@ -1,2 +1,2 @@
 # nlp-assignments
-My coding assignments for NLP course at AIT
+My coding assignment submissions for the NLP course at Asian Institute of Technology
