@@ -1,2 +1,2 @@
 # nlp-assignments
-My coding assignment submissions for the NLP course at Asian Institute of Technology
+My homework assignment submissions for the NLP course at Asian Institute of Technology
