@@ -3,17 +3,17 @@ import spacy
 from spacy.lang.en.stop_words import STOP_WORDS
 from PyPDF2 import PdfReader 
 
-# Load NLP model
-nlp = spacy.load('en_core_web_md')
-
-# Add entity ruler to NLP
-ruler = nlp.add_pipe("entity_ruler", before="ner")
-
-# Load skill and education lables to the ruler
-ruler.from_disk('skills_and_education.jsonl')
-
 # Function to extract skills and education from a resume
 def get_skills_education(resume_path):
+
+    # Load NLP model
+    nlp = spacy.load('en_core_web_md')
+
+    # Add entity ruler to NLP
+    ruler = nlp.add_pipe("entity_ruler", before="ner")
+
+    # Load skill and education lables to the ruler
+    ruler.from_disk('skills_and_education.jsonl')
 
     # Load sample resume
     reader = PdfReader(resume_path)
