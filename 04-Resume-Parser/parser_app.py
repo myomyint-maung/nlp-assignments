@@ -1,5 +1,4 @@
 # Import necessary libraries
-import pandas as pd
 import spacy
 from spacy.lang.en.stop_words import STOP_WORDS
 from PyPDF2 import PdfReader 
