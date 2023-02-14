@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask_wtf import FlaskForm
 from wtforms import FileField, SubmitField
+from wtforms.validators import InputRequired
 from werkzeug.utils import secure_filename
 import os
 
@@ -9,7 +10,7 @@ app.config['SECRET_KEY'] = 'secretkey'
 app.config['UPLOAD_FOLDER'] = 'static/files'
 
 class UploadFile(FlaskForm):
-    file = FileField("File")
+    file = FileField("File", validators=[InputRequired()])
     submit = SubmitField("Upload File")
 
 @app.route('/', methods=['GET', 'POST'])
