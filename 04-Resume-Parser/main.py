@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, flash, redirect
+from flask import Flask, render_template, redirect
 from flask_wtf import FlaskForm
 from wtforms import FileField, SubmitField
 from wtforms.validators import InputRequired
@@ -26,12 +26,10 @@ def home():
 
 @app.route('/uploadfile', methods=['POST'])
 def uploadfile():
-    if 'File' not in request.files:
-        flash('No file uploaded')
-        return redirect('/home')
-    
-    file = request.files['File']
-    file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename)))
+    form = UploadFile()
+    if form.validate_on_submit():
+        file = form.file.data
+        file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename)))
     return redirect('/parsefile')
 
 @app.route('/parsefile', methods=['GET'])
