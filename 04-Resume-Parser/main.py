@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import FileField, SubmitField
 from wtforms.validators import InputRequired
 from werkzeug.utils import secure_filename
+from parser import get_skills_education
 import os
 
 app = Flask(__name__)
@@ -34,11 +35,9 @@ def uploadfile():
 
 @app.route('/parsefile', methods=['GET'])
 def display():
-    filename = os.listdir('static/files')
-    if len(filename) == 0:
-        return redirect('/home')
+    resume = file
     
-    skills, education = get_skills_education('./static/files/' + filename[0])
+    skills, education = get_skills_education(resume)
     
     return render_template('result.html', skills=skills, education=education)
 
