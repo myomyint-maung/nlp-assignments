@@ -1,19 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h1><em>Resume Parser</em></h1>
-    <h2>by Myo Myint Maung</h2>
+<title>Resume Parser</title>
 
-    <form method="POST" enctype="multipart/form-data">
-        {{form.hidden_tag()}}
-        {{form.file()}}
-        {{form.submit()}}
+<div>
+    <h1 id="homepage-header">Resume Parser</h1>
+    <h2><i>by Myo Myint Maung</i></h2>
+</div>
+
+<div id="homepage-intro">
+    <h4>This resume parser extracts skill and education information out of uploaded resumes (in PDF format only).</h4>
+</div>
+
+<div id="homepage-form">
+    <h3>Upload Resume</h3>
+    <form action="/upload_file" method="POST" enctype="multipart/form-data">
+        <input type="file" id="File" name="File" accept=".pdf">
+        <button type="submit" class="btn btn-secondary">Parse</button>
     </form>
-</body>
-</html>
+</div>
