@@ -2,7 +2,7 @@
 import spacy
 from spacy.lang.en.stop_words import STOP_WORDS
 from PyPDF2 import PdfReader 
-from flask import Flask, request,render_template
+from flask import Flask, request, render_template
 from jinja2 import Template
 
 app = Flask(__name__)
