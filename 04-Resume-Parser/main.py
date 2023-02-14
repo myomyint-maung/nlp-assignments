@@ -26,7 +26,7 @@ def home():
     return render_template('home.html', form=form)
 
 @app.route('/uploadfile', methods=['POST'])
-def uploadfile():
+def upload_file():
     form = UploadFile()
     if form.validate_on_submit():
         file = form.file.data
@@ -34,7 +34,7 @@ def uploadfile():
     return redirect('/parsefile')
 
 @app.route('/parsefile', methods=['GET'])
-def display():
+def parse_file():
     form = UploadFile()
     file = form.file.data
     skills, education = get_skills_education(file)

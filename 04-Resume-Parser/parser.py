@@ -4,7 +4,7 @@ from spacy.lang.en.stop_words import STOP_WORDS
 from PyPDF2 import PdfReader
 
 # Function to extract skills and education from a resume file
-def get_skills_education(file_path):
+def get_skills_education(file):
 
     # Load NLP model
     nlp = spacy.load('en_core_web_md')
@@ -16,7 +16,7 @@ def get_skills_education(file_path):
     ruler.from_disk('skills_and_education.jsonl')
 
     # Load the PDF file
-    reader = PdfReader(file_path)
+    reader = PdfReader(file)
 
     # Extract text from the PDF
     text = str()
