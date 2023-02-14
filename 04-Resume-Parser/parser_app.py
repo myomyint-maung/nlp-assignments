@@ -1,14 +1,10 @@
 # Import necessary libraries
 import spacy
 from spacy.lang.en.stop_words import STOP_WORDS
-from PyPDF2 import PdfReader 
-from flask import Flask, request, render_template
-from jinja2 import Template
+from PyPDF2 import PdfReader
 
-app = Flask(__name__)
-
-# Function to extract skills and education from a resume
-def get_skills_education():
+# Function to extract skills and education from a resume file
+def get_skills_education(file_path):
 
     # Load NLP model
     nlp = spacy.load('en_core_web_md')
@@ -19,11 +15,8 @@ def get_skills_education():
     # Load skill and education lables to the ruler
     ruler.from_disk('skills_and_education.jsonl')
 
-    # Load a PDF file
-    file = request.files("pdf_file")
-
-    # Read the PDF file
-    reader = PdfReader(file)
+    # Load the PDF file
+    reader = PdfReader(file_path)
 
     # Extract text from the PDF
     text = str()
@@ -77,16 +70,3 @@ def get_skills_education():
     education.reverse()
 
     return skills, education
-
-@app.route('/', methods=['GET', 'POST'])
-def upload():
-    if request.method == 'POST':
-
-        # Call the get_skills_education function and pass the pdf_file as an argument
-        skills, education = get_skills_education()
-        # Render the result template and pass the extracted data as arguments
-        return render_template('result.html', skills=skills, education=education)
-    return render_template('upload.html')
-
-if __name__ == "__main__":
-    app.run(debug=True)
