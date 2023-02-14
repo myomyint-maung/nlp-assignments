@@ -4,38 +4,46 @@ import os
 from parser import get_skills_education
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secretkey'
+app.config['SECRET_KEY'] = 'supersecretkey'
 app.config['UPLOAD_FOLDER'] = 'static/files'
 ALLOWED_EXTENSIONS = {'pdf'}
 
 def allowed_file(filename):
     return '.' in filename and \
-        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-class UploadFile(FlaskForm):
-    file = FileField("File", validators=[InputRequired()])
-    submit = SubmitField("Upload File")
+def remove_uploaded_resume():
+     file_list = os.listdir('static/files')
+     for filename in file_list:
+          os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 @app.route('/')
 @app.route('/home')
 def home():
-    form = UploadFile()
-    return render_template('home.html', form=form)
+    remove_uploaded_resume()
+    return render_template('home.html')
 
-@app.route('/uploadfile', methods=['POST'])
+@app.route('/upload_file', methods=["POST"])
 def upload_file():
-    form = UploadFile()
-    if form.validate_on_submit():
-        file = form.file.data
-        file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename)))
-    return redirect('/parsefile')
+     remove_uploaded_resume()
+     if 'File' not in request.files:
+          flash('No file uploaded')
+          return redirect('/')
 
-@app.route('/parsefile', methods=['GET'])
-def parse_file():
-    form = UploadFile()
-    file = form.file.data
-    skills, education = get_skills_education(file)
-    return render_template('result.html', skills=skills, education=education)
+     file_upload = request.files['File']
+     file_upload.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file_upload.filename)))
+     return redirect('/parsed_file')
+
+@app.route('/parsed_file', methods=["GET"])
+def parsed_file():
+     filename = os.listdir('static/files')
+
+     if len(filename) == 0:
+          return redirect('/')
+
+     skills, education = get_skills_education('./static/files/' + filename[0])
+     
+     return render_template('result.html', skills=skills, education=education)
 
 if __name__ == '__main__':
     app.run(debug=True)
