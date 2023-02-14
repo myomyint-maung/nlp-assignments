@@ -1,10 +1,7 @@
-from flask import Flask, render_template, redirect
-from flask_wtf import FlaskForm
-from wtforms import FileField, SubmitField
-from wtforms.validators import InputRequired
+from flask import Flask, request, render_template, flash, redirect
 from werkzeug.utils import secure_filename
-from parser import get_skills_education
 import os
+from parser import get_skills_education
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secretkey'
