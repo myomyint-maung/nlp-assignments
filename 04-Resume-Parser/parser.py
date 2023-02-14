@@ -13,7 +13,7 @@ def get_skills_education(file_path):
     ruler = nlp.add_pipe("entity_ruler", before="ner")
 
     # Load skill and education lables to the ruler
-    ruler.from_disk('static/pattern_data/skills_and_education.jsonl')
+    ruler.from_disk('static/data/skills_and_education.jsonl')
 
     # Load the PDF file
     reader = PdfReader(file_path)
