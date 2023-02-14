@@ -1,0 +1,27 @@
+<title>Result</title>
+
+<div>
+    <h1 id="homepage-header">Parsed Information</h1>
+</div>
+
+<a href="{{ url_for('home') }}" class="button btn btn-primary">Back</a>
+
+<table>
+    <tr>
+        <th>Education</th>
+        <td>
+            {% for edu in education %}
+            <div class="education-background">{{ edu }}</div>
+            {% endfor %}
+        </td>
+    </tr>
+
+    <tr>
+        <th>Skills</th>
+        <td>
+            {% for skill in skills %}
+            <div class="skill-background">{{ skill }}</div>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
