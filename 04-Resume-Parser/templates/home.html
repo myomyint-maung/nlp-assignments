@@ -7,6 +7,13 @@
     <title>Home</title>
 </head>
 <body>
-    <h1><em>Resume Parser</em></h1><h2>by Myo Myint Maung</h2>
+    <h1><em>Resume Parser</em></h1>
+    <h2>by Myo Myint Maung</h2>
+
+    <form method="POST">
+        {{form.hidden_tag()}}
+        {{form.file()}}
+        {{form.submit()}}
+    </form>
 </body>
 </html>
