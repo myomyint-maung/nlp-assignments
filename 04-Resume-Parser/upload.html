@@ -1,0 +1,63 @@
+<!-- <html>
+
+    <head>
+        <title>PDF Extractor</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <h1>Welcome to resume extractor website</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="pdf_file">
+            <input type="submit" value="Upload">
+        </form>
+    </body>
+</html> -->
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <header>
+        <img src="./static/logo.png" alt="PDF Extractor Logo">
+        <h1>PDF Extractor</h1>
+      </header>
+    <div id="drop-area">Drop your file here</div>
+    <p id="file-name"></p>
+
+    <form method="post" enctype="multipart/form-data" class="hidden">
+      <input type="file" id="pdf_file" name="pdf_file" style="display:none">
+      <input type="submit" value="Upload">
+    </form>
+
+    <script>
+      const dropArea = document.getElementById('drop-area');
+      const fileInput = document.getElementById('pdf_file');
+      const fileNameDisplay = document.getElementById('file-name');
+      const form = document.querySelector('form');
+
+      dropArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropArea.style.backgroundColor = '#eee';
+      });
+
+      dropArea.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        dropArea.style.backgroundColor = '';
+      });
+
+      dropArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropArea.style.backgroundColor = '';
+
+        const file = e.dataTransfer.files[0];
+        fileInput.files = e.dataTransfer.files;
+        dropArea.innerHTML = file.name;
+   
+        form.classList.remove('hidden');
+      });
+    </script>
+  </body>
+</html>
+
+

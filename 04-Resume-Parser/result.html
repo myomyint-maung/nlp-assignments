@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>PDF Data Extractor</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style_table.css') }}">
+  </head>
+  <body>
+    <h1>Skills Data</h1>
+    <table>
+      <tr>
+        <th>Skills</th>
+      </tr>
+      {% for skill in skills %}
+      <tr>
+        <td>{{ skill }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <h1>Education Data</h1>
+    <table>
+      <tr>
+        <th>Degree</th>
+        <th>Field</th>
+        <th>Institute</th>
+      </tr>
+      {% for i in range( degree|length) %}
+      <tr>
+        <td>{{ degree[i] }}</td>
+        <td>{{ field[i] }}</td>
+        <td>{{ institute[i] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <a href="{{ url_for('upload') }}">Back to Upload</a>
+  </body>
+</html>
