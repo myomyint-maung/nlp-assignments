@@ -35,10 +35,9 @@ def uploadfile():
 
 @app.route('/parsefile', methods=['GET'])
 def display():
-    resume = file
-    
-    skills, education = get_skills_education(resume)
-    
+    form = UploadFile()
+    file = form.file.data
+    skills, education = get_skills_education(file)
     return render_template('result.html', skills=skills, education=education)
 
 if __name__ == '__main__':
