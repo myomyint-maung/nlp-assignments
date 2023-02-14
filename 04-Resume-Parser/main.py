@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secretkey'
 
 class UploadFile(FlaskForm):
-    file = FileField("file")
+    file = FileField("File")
     submit = SubmitField("Upload File")
 
 @app.route('/', methods=['GET', 'POST'])
