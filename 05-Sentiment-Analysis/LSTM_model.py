@@ -82,6 +82,8 @@ save_path = f'models/{model.__class__.__name__}_SST2.pt'
 model.load_state_dict(torch.load(save_path, map_location=torch.device(device)))
 
 # Create a function for sentiment prediction
+text_pipeline  = lambda x: vocab(tokenizer(x))
+ 
 def predict_sentiment(text):
     text = torch.tensor(text_pipeline(test_str)).to(device)
     text = text.reshape(1, -1)

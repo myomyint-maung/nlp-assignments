@@ -80,10 +80,10 @@ def home():
 
 @app.route('/search_query', methods=["POST"])
 def search_query():
-    if 'query' not in request.form:
+    if 'Query' not in request.form:
         return redirect('/')
 
-    session["query"] = request.form['query']
+    session["query"] = request.form['Query']
 
     return redirect('/sentiment_analysis')
 
