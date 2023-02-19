@@ -94,8 +94,6 @@ val_loader_length   = len(list(iter(val_loader)))
 test_loader_length  = len(list(iter(test_loader)))
 
 # Create the LSTM model
-import torch.nn as nn
-
 class LSTM(nn.Module):
     def __init__(self, input_dim, emb_dim, hid_dim, output_dim, num_layers, bidirectional, dropout):
         super().__init__()
@@ -247,8 +245,6 @@ val_losses = []
 val_accs = []
 
 for epoch in range(num_epochs):
-    
-    start_time = time.time()
 
     train_loss, train_acc = train(model, train_loader, optimizer, criterion, train_loader_length)
     val_loss, val_acc = evaluate(model, val_loader, criterion, val_loader_length)
@@ -258,10 +254,6 @@ for epoch in range(num_epochs):
     train_accs.append(train_acc)
     val_losses.append(val_loss)
     val_accs.append(val_acc)
-    
-    end_time = time.time()
-    
-    epoch_mins, epoch_secs = epoch_time(start_time, end_time)
     
     if val_loss < best_val_loss:
         best_val_loss = val_loss
