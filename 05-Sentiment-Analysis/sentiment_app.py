@@ -91,7 +91,12 @@ def search_query():
 def sentiment_analysis():
     query = session.get('query', None)
     tweets = get_tweet(query)
-    sentiments = predict_sentiment(tweets)  
+
+    sentiments = []
+    for tweet in tweets:
+        prediction = int(predict_sentiment(tweet))
+        sentiments.append(prediction)
+    
     sentiment_counts = count_sentiment(sentiments)
     
     labels = list(sentiment_counts.keys())
