@@ -11,7 +11,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # Load training data
 train = SST2(split='train')
 
-# Create vocab
+# Define vocab
 tokenizer = get_tokenizer('spacy', language='en_core_web_sm')
 
 def yield_tokens(data_iter):
@@ -27,7 +27,7 @@ vocab.set_default_index(vocab['<unk>'])
 # Set the padding index
 pad_idx = vocab['<pad>']
 
-# Create the LSTM model
+# Define the model
 class LSTM(nn.Module):
     def __init__(self, input_dim, emb_dim, hid_dim, output_dim, num_layers, bidirectional, dropout):
         super().__init__()
@@ -66,4 +66,29 @@ class LSTM(nn.Module):
         
         return self.fc(hn)
 
+# Instantiate the model
+input_dim  = len(vocab)
+hid_dim    = 256
+emb_dim    = 300
+output_dim = 2
+num_layers = 2
+bidirectional = True
+dropout = 0.5
 
+model = LSTM(input_dim, emb_dim, hid_dim, output_dim, num_layers, bidirectional, dropout).to(device)
+
+# Load the pretrained model
+save_path = f'models/{model.__class__.__name__}_SST2.pt'
+model.load_state_dict(torch.load(save_path, map_location=torch.device(device)))
+
+# Create a function for sentiment prediction
+def predict_sentiment(text):
+    text = torch.tensor(text_pipeline(test_str)).to(device)
+    text = text.reshape(1, -1)
+    text_length = torch.tensor([text.size(1)]).to(dtype=torch.int64)
+
+    with torch.no_grad():
+        output = model(text, text_length).squeeze(1)
+        predicted = torch.max(output.data, 1)[1]
+    
+    return predicted
