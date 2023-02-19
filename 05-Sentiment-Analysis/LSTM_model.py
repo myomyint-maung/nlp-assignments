@@ -86,7 +86,7 @@ model.load_state_dict(torch.load(save_path, map_location=torch.device(device)))
 
 # Create a function for sentiment prediction
 def predict_sentiment(text):
-    text = torch.tensor(text_pipeline(test_str)).to(device)
+    text = torch.tensor(text_pipeline(text)).to(device)
     text = text.reshape(1, -1)
     text_length = torch.tensor([text.size(1)]).to(dtype=torch.int64)
 
@@ -96,4 +96,7 @@ def predict_sentiment(text):
     
     return predicted
 
-print('success')
+# Test the function
+prediction = predict_sentiment("The story is not bad.")
+
+print(prediction)
