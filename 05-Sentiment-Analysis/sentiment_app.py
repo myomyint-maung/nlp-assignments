@@ -12,7 +12,7 @@ from flask import Flask, request, render_template, flash, redirect, session
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secretkey'
 
-def get_tweets(query):
+def get_tweet(query):
     tweets = []
     for tweet in sntwitter.TwitterSearchScraper(query).get_items():
         if len(tweets) == 100:
@@ -23,7 +23,7 @@ def get_tweets(query):
     
     return tweets
 
-def count_sentiments(sentiments):
+def count_sentiment(sentiments):
     neg_counts = 0
     pos_counts = 0
     for sentiment in sentiments:
@@ -90,9 +90,9 @@ def search_query():
 @app.route('/sentiment_analysis', methods=["GET"])
 def sentiment_analysis():
     query = session.get('query', None)
-    tweets = get_tweets(query)
+    tweets = get_tweet(query)
     sentiments = predict_sentiment(tweets)  
-    sentiment_counts = count_sentiments(sentiments)
+    sentiment_counts = count_sentiment(sentiments)
     
     labels = list(sentiment_counts.keys())
     counts = list(sentiment_counts.vlaues())
