@@ -27,6 +27,9 @@ vocab.set_default_index(vocab['<unk>'])
 # Set the padding index
 pad_idx = vocab['<pad>']
 
+# Define text pipeline
+text_pipeline  = lambda x: vocab(tokenizer(x))
+
 # Define the model
 class LSTM(nn.Module):
     def __init__(self, input_dim, emb_dim, hid_dim, output_dim, num_layers, bidirectional, dropout):
@@ -82,8 +85,6 @@ save_path = f'models/{model.__class__.__name__}_SST2.pt'
 model.load_state_dict(torch.load(save_path, map_location=torch.device(device)))
 
 # Create a function for sentiment prediction
-text_pipeline  = lambda x: vocab(tokenizer(x))
- 
 def predict_sentiment(text):
     text = torch.tensor(text_pipeline(test_str)).to(device)
     text = text.reshape(1, -1)
@@ -94,3 +95,5 @@ def predict_sentiment(text):
         predicted = torch.max(output.data, 1)[1]
     
     return predicted
+
+print('success')
