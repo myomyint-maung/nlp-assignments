@@ -29,7 +29,7 @@ def count_sentiment(sentiments):
     for sentiment in sentiments:
         if sentiment == 0:
             neg_counts += 1
-        elif sentitment == 1:
+        elif sentiment == 1:
             pos_counts += 1
     
     sentiment_counts = {'negative': neg_counts, 'positive': pos_counts}
@@ -43,8 +43,7 @@ def preprocessing(sentence):
     cleaned_tokens = []
     for token in doc:
         if token.text.lower() not in stopwords and token.pos_ != 'PUNCT' and token.pos_ != 'SPACE' and \
-            token.pos_ != 'SYM' and token.text not in list('0123456789+-*^%$#@') and \
-            token.text.lower() not in list(query.lower().split(" ")) and \
+            token.pos_ != 'SYM' and token.text not in list('0123456789+-*^~%$#@/\|[]<>(){}') and \
             token.text.startswith('@') == False:
             cleaned_tokens.append(token.lemma_.lower().strip())
 
@@ -100,7 +99,7 @@ def sentiment_analysis():
     sentiment_counts = count_sentiment(sentiments)
     
     labels = list(sentiment_counts.keys())
-    counts = list(sentiment_counts.vlaues())
+    counts = list(sentiment_counts.values())
     plt.bar(labels, counts)
 
     buf = BytesIO()
