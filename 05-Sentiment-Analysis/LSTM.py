@@ -239,7 +239,7 @@ def evaluate(model, loader, criterion, loader_length):
 best_val_loss = float('inf')
 num_epochs      = 10
 
-save_path = f'models/{model.__class__.__name__}_SST.pt'
+save_path = f'models/{model.__class__.__name__}.pt'
 
 train_losses = []
 train_accs = []
@@ -266,4 +266,3 @@ for epoch in range(num_epochs):
     if val_loss < best_val_loss:
         best_val_loss = val_loss
         torch.save(model.state_dict(), save_path)
-
