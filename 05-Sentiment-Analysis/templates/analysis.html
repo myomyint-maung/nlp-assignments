@@ -1,0 +1,26 @@
+<title>Sentiment Analysis</title>
+
+<div id="result-header">
+    <h1>Sentiment Analysis</h1>
+    <h3>Query: {{ query }}</h3>
+</div>
+
+<a href="{{ url_for('home') }}" class="return-button button btn btn-primary">Return to Home Page</a>
+
+<h3>Sentiment Counts of 100 Tweets</h3>
+<img class="plot" src="data:image/png;base64, {{ sentiment_plot }}">
+
+
+<h3 class="top-words-header">Top 10 Positive Words</h3>
+<div id="positive-words">
+    {% for pos_word in top_pos_words %}
+        <div>{{ pos_word }}</div>
+    {% endfor %}
+</div>
+
+<h3 class="top-words-header">Top 10 Negative Words</h3>
+<div id="negative-words">
+    {% for neg_word in top_neg_words %}
+        <div>{{ neg_word }}</div>
+    {% endfor %}
+</div>
