@@ -43,7 +43,7 @@ def preprocessing(sentence):
     cleaned_tokens = []
     for token in doc:
         if token.text.lower() not in stopwords and token.pos_ != 'PUNCT' and token.pos_ != 'SPACE' and \
-            token.pos_ != 'SYM' and token.text not in list('0123456789+-*^~%$#@/\|[]<>(){}') and \
+            token.pos_ != 'SYM' and token.text not in list('0123456789+-*^~%$#@&/\|[]<>(){}') and \
             token.text.startswith('@') == False:
             cleaned_tokens.append(token.lemma_.lower().strip())
 
@@ -66,9 +66,16 @@ def get_top_words(tweets, sentiments):
     for i in range(len(pos_corpus)):
         for word in pos_corpus[i]:
             pos_vocab.append(word)
+
+    top_neg_words = []
+    for i in range(10):
+        neg_word = Counter(neg_vocab).most_common(10)[i][0]
+        top_neg_words.append(neg_word)
     
-    top_neg_words = Counter(neg_vocab).most_common(10)
-    top_pos_words = Counter(pos_vocab).most_common(10)
+    top_pos_words = []
+    for i in range(10):
+        pos_word = Counter(pos_vocab).most_common(10)[i][0]
+        top_pos_words.append(pos_word)
 
     return top_neg_words, top_pos_words
 
