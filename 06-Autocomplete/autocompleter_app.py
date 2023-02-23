@@ -26,7 +26,7 @@ def autocomplete():
         prompt = form.prompt.data 
         code = predict(prompt)
         form.name.data = ""
-    return render_template("autocomplete.html", form=form, string=string, code=code)
+    return render_template("autocomplete.html", form=form, prompt=prompt, code=code)
 
 if __name__ == '__main__':
     app.run(debug=True)
