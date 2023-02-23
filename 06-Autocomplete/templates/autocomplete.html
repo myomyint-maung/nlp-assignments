@@ -10,14 +10,14 @@
     <div>
         <form action="" method="POST">
             {{form.csrf_token}}
-            {{form.name.label}}
-            {{form.name()}}
+            {{form.prompt.label}}
+            {{form.prompt()}}
             <br>
             {{form.submit()}}
         </form>
         <hr>
-        {% if name %}
-            Type    : {{name}}
+        {% if prompt %}
+            Type    : {{prompt}}
             <br>
             Predict : {{code}}
         {% else %}
