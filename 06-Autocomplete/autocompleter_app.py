@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secretkey'
 
 class MyForm(FlaskForm):
-    prompt = StringField('Input Prompt', validators=[DataRequired()])
+    prompt = StringField('Input code', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 @app.route('/')
