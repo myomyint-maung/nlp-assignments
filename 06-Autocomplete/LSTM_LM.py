@@ -54,8 +54,7 @@ lr = 1e-3
 model = LSTMLanguageModel(vocab_size, emb_dim, hid_dim, num_layers, dropout_rate).to(device)
 
 # Load the pre-trained model
-model_path = '/content/drive/My Drive/models/lstm_lm.pt'
-model.load_state_dict(torch.load(model_path, map_location=torch.device(device)))
+model.load_state_dict(torch.load('lstm_lm.pt', map_location=torch.device(device)))
 
 # Define the function for code generation
 def generate(prompt, max_seq_len, temperature, model, tokenizer, vocab, device, seed=None):
