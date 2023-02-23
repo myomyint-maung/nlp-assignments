@@ -12,10 +12,6 @@ class MyForm(FlaskForm):
     submit = SubmitField('Submit')
 
 @app.route('/')
-@app.route('/home')
-def home():
-    return render_template("home.html")
-
 @app.route('/autocomplete', methods = ['GET','POST'])
 def autocomplete():
     form = MyForm()

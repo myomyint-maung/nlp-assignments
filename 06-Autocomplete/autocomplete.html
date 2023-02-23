@@ -7,8 +7,9 @@
     <title>Python Autocompleter</title>
 </head>
 <body>
+    <h1>Python Autocompleter</h1>
     <div>
-        <form action="" method="POST">
+        <form action="{{url_for('autocomplete')}}" method="POST">
             {{form.csrf_token}}
             {{form.name.label}}
             {{form.name()}}
@@ -17,14 +18,13 @@
         </form>
         <hr>
         {% if name %}
-            Type    : {{name}}
+            Prompt  : {{name}}
             <br>
             Predict : {{code}}
         {% else %}
-            Not Found
+            No result
         {% endif %}
         <hr>
     </div>
-    <a href="{{ url_for('home') }}" class="return-button button btn btn-primary">Return to Home</a>
 </body>
 </html>
