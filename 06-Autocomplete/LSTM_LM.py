@@ -9,13 +9,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # Define the tokenizer
 tokenizer = torchtext.data.utils.get_tokenizer('spacy', language='en_core_web_sm')
 
-# Mount Google Drive
-from google.colab import drive
-drive.mount('/content/drive')
-
 # Load the pre-saved vocab
-vocab_path = '/content/drive/My Drive/data/vocab.pkl'
-with open(vocab_path, 'rb') as file:
+with open('vocab.pkl', 'rb') as file:
     vocab = pickle.load(file)
 
 # Define the model
