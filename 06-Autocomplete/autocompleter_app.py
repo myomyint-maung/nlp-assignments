@@ -6,7 +6,6 @@ from LSTM_LM import predict
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secretkey'
-app.config['UPLOAD_FOLDER'] = 'static/files' 
 
 class MyForm(FlaskForm):
     prompt = StringField('Input Prompt', validators=[DataRequired()])
