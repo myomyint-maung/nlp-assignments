@@ -9,8 +9,13 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # Define the tokenizer
 tokenizer = torchtext.data.utils.get_tokenizer('spacy', language='en_core_web_sm')
 
-# Load the vocab
-with open('vocab.pkl', 'rb') as file:
+# Mount Google Drive
+from google.colab import drive
+drive.mount('/content/drive')
+
+# Load the pre-saved vocab
+vocab_path = '/content/drive/My Drive/data/vocab.pkl'
+with open(vocab_path, 'rb') as file:
     vocab = pickle.load(file)
 
 # Define the model
@@ -53,8 +58,9 @@ lr = 1e-3
 
 model = LSTMLanguageModel(vocab_size, emb_dim, hid_dim, num_layers, dropout_rate).to(device)
 
-# Load the pretrained model
-model.load_state_dict(torch.load('lstm_lm.pt', map_location=torch.device(device)))
+# Load the pre-trained model
+model_path = '/content/drive/My Drive/models/lstm_lm.pt'
+model.load_state_dict(torch.load(model_path, map_location=torch.device(device)))
 
 # Define the function for code generation
 def generate(prompt, max_seq_len, temperature, model, tokenizer, vocab, device, seed=None):
