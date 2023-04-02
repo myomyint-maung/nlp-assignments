@@ -245,4 +245,4 @@ def translate(source):
     for token in output_max:
         translation.append(mapping[token.item()])
     
-    return print(' '.join(translation))
+    return ' '.join(translation)
