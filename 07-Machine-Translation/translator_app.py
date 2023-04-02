@@ -12,8 +12,8 @@ class MyForm(FlaskForm):
     submit = SubmitField('Translate')
 
 @app.route('/')
-@app.route('/translate', methods = ['GET','POST'])
-def translate():
+@app.route('/translator', methods = ['GET','POST'])
+def translator():
     form = MyForm()
     name = False
     code = False
@@ -22,7 +22,7 @@ def translate():
         name = form.name.data 
         code = translate(name)
         form.name.data = ""
-    return render_template("translate.html", form=form, name=name, code=code)
+    return render_template("translator.html", form=form, name=name, code=code)
 
 if __name__ == '__main__':
     app.run(debug=True)

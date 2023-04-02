@@ -9,7 +9,7 @@
 <body>
     <h1>Myanmar-English Translator</h1>
     <div>
-        <form action="{{url_for('translate')}}" method="POST">
+        <form action="{{url_for('translator')}}" method="POST">
             {{form.csrf_token}}
             {{form.name.label}}
             {{form.name()}}
@@ -18,9 +18,9 @@
         </form>
         <hr>
         {% if name %}
-            Input  : {{name}}
+            Myanmar  : {{name}}
             <br>
-            Output : {{code}}
+            English : {{code}}
         {% else %}
             No result
         {% endif %}
