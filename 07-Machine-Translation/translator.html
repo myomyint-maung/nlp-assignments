@@ -11,16 +11,16 @@
     <div>
         <form action="{{url_for('translator')}}" method="POST">
             {{form.csrf_token}}
-            {{form.name.label}}
-            {{form.name()}}
+            {{form.source.label}}
+            {{form.source()}}
             <br>
             {{form.submit()}}
         </form>
         <hr>
-        {% if name %}
-            Myanmar  : {{name}}
+        {% if source %}
+            Myanmar  : {{source}}
             <br>
-            English : {{code}}
+            English : {{target}}
         {% else %}
             No result
         {% endif %}
