@@ -217,7 +217,7 @@ SRC_PAD_IDX = PAD_IDX
 
 model = Seq2Seq(enc, dec, SRC_PAD_IDX, device).to(device)
 
-model.load_state_dict(torch.load('./models/AdditiveSeq2Seq.pt', map_location=torch.device('cpu')))
+model.load_state_dict(torch.load('./models/AdditiveSeq2Seq.pt', map_location=torch.device(device)))
 
 # Define the function to translate from Myanmar to English
 def translate(source):
