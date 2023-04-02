@@ -201,6 +201,24 @@ class Seq2Seq(nn.Module):
             
         return outputs, attentions
 
+# Set hyperparameters
+input_dim   = len(vocab_transform[SRC_LANGUAGE])
+output_dim  = len(vocab_transform[TRG_LANGUAGE])
+emb_dim     = 64  
+hid_dim     = 128  
+dropout     = 0.5
+
+# Load model
+attn = AdditiveAttention(hid_dim)
+enc  = Encoder(input_dim,  emb_dim,  hid_dim, dropout)
+dec  = Decoder(output_dim, emb_dim,  hid_dim, dropout, attn)
+
+SRC_PAD_IDX = PAD_IDX
+
+model = Seq2Seq(enc, dec, SRC_PAD_IDX, device).to(device)
+
+model.load_state_dict(torch.load('./models/AdditiveSeq2Seq.pt'))
+
 # Define the function to translate from Myanmar to English
 def translate(source):
     src_text = text_transform[SRC_LANGUAGE](source).to(device)
@@ -210,22 +228,6 @@ def translate(source):
     target = "<pad>"*int(src_text[0]*2)
     trg_text = text_transform[TRG_LANGUAGE](target).to(device)
     trg_text = trg_text.reshape(-1, 1)
-
-    input_dim   = len(vocab_transform[SRC_LANGUAGE])
-    output_dim  = len(vocab_transform[TRG_LANGUAGE])
-    emb_dim     = 64  
-    hid_dim     = 128  
-    dropout     = 0.5
-
-    attn = AdditiveAttention(hid_dim)
-    enc  = Encoder(input_dim,  emb_dim,  hid_dim, dropout)
-    dec  = Decoder(output_dim, emb_dim,  hid_dim, dropout, attn)
-
-    SRC_PAD_IDX = PAD_IDX
-
-    model = Seq2Seq(enc, dec, SRC_PAD_IDX, device).to(device)
-
-    model.load_state_dict(torch.load('./models/AdditiveSeq2Seq.pt'))
 
     model.eval()
     with torch.no_grad():
