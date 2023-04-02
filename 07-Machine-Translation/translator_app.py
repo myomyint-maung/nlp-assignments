@@ -22,7 +22,7 @@ def autocomplete():
         source = form.name.data 
         target = translate(source)
         form.source.data = ""
-    return render_template("translate.html", form=form, source=source, source=target)
+    return render_template("translate.html", form=form, source=source, target=target)
 
 if __name__ == '__main__':
     app.run(debug=True)
