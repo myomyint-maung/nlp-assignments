@@ -13,16 +13,16 @@ class MyForm(FlaskForm):
 
 @app.route('/')
 @app.route('/translate', methods = ['GET','POST'])
-def translate():
+def autocomplete():
     form = MyForm()
-    source = False
-    target = False
+    name = False
+    code = False
     print(form.validate_on_submit())
     if form.validate_on_submit():
-        source = form.source.data 
+        source = form.name.data 
         target = translate(source)
-        form.source.data = ""
-    return render_template("machine_translation.html", form=form, source=source, target=target)
+        form.name.data = ""
+    return render_template("translate.html", form=form, name=source, code=target)
 
 if __name__ == '__main__':
     app.run(debug=True)
