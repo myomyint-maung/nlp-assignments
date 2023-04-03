@@ -239,11 +239,10 @@ def translate(source):
 
     output_max = output.argmax(1)
 
-    # mapping = vocab_transform[TRG_LANGUAGE].get_itos()
+    mapping = vocab_transform[TRG_LANGUAGE].get_itos()
 
-    # translation = []
-    # for token in output_max:
-    #     translation.append(mapping[token.item()])
+    translation = []
+    for token in output_max:
+        translation.append(mapping[token.item()])
     
-    # return ' '.join(translation)
-    return output_max
+    return ' '.join(translation)
