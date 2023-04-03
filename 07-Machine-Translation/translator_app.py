@@ -22,7 +22,7 @@ def translator():
         source = form.source.data 
         target = translate(source)
         form.source.data = ""
-    return render_template("translator.html", form=form, source=source, target=target)
+    return render_template('translaotr.html', form=form, source=source, target=target)
 
 if __name__ == '__main__':
     app.run(debug=True)
