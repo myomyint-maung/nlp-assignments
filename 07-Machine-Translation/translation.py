@@ -225,7 +225,7 @@ def translate(source):
     src_text = src_text.reshape(-1, 1)  #because batch_size is 1
     text_length = torch.tensor([src_text.size(0)]).to(dtype=torch.int64)
     
-    target = "translate" * src_text.size(0)
+    target = "This English sentence is not the actual translation of the Myanmar text which is to be translated."
     trg_text = text_transform[TRG_LANGUAGE](target).to(device)
     trg_text = trg_text.reshape(-1, 1)
 
