@@ -359,4 +359,4 @@ def predict(prompt):
     temperature = 0.5
     seed = 0
     generation = generate(prompt, max_seq_len, temperature, model, tokenizer, vocab, device, seed)
-    return print(' '.join(generation))
+    return ' '.join(generation)

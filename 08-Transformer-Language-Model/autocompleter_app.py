@@ -16,13 +16,13 @@ class MyForm(FlaskForm):
 def autocomplete():
     form = MyForm()
     prompt = False
-    code = False
+    prediction = False
     print(form.validate_on_submit())
     if form.validate_on_submit():
         prompt = form.prompt.data 
-        code = predict(prompt)
+        prediction = predict(prompt)
         form.prompt.data = ""
-    return render_template('autocomplete.html', form=form, prompt=prompt, code=code)
+    return render_template('autocomplete.html', form=form, prompt=prompt, prediction=prediction)
 
 if __name__ == '__main__':
     app.run(debug=True)
