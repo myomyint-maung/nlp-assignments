@@ -9,7 +9,7 @@
 <body>
     <h1>Code Autocompleter with Transformer</h1>
     <div>
-        <form action="{{url_for('autocompleter')}}" method="POST">
+        <form action="{{url_for('autocomplete')}}" method="POST">
             {{form.csrf_token}}
             {{form.prompt.label}}
             {{form.prompt()}}
