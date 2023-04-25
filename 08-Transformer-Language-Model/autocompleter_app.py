@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, StringField
 from wtforms.validators import DataRequired
-from Transformer_LM import predict
+from transformer import predict
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secretkey'
