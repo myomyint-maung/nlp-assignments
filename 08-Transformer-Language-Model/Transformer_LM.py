@@ -187,7 +187,7 @@ class Decoder(nn.Module):
     def beam_decode(self, penalty_alpha = 0.9, max_length = 5, beam_size = 5):
         
         # Start with SOS Import numpy as
-        prompt = 'Import numpy as '
+        prompt = 'Import numpy as'
         
         tokens = tokenizer(prompt)
         indices = [SOS_IDX] + [vocab[t] for t in tokens]
@@ -364,5 +364,5 @@ def predict(prompt):
     print(str(temperature)+'\n'+' '.join(generation)+'\n')
 
 # Test the function for prediction
-prompt = 'from sklearn '
+prompt = 'from sklearn'
 print(predict(prompt))
