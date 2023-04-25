@@ -22,7 +22,7 @@ def autocomplete():
         prompt = form.prompt.data 
         code = predict(prompt)
         form.prompt.data = ""
-    return render_template('autocompleter.html', form=form, prompt=prompt, code=code)
+    return render_template('autocomplete.html', form=form, prompt=prompt, code=code)
 
 if __name__ == '__main__':
     app.run(debug=True)
