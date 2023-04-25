@@ -8,21 +8,21 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secretkey'
 
 class MyForm(FlaskForm):
-    source = StringField('Input python code', validators=[DataRequired()])
+    prompt = StringField('Input prompt', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 @app.route('/')
-@app.route('/autocompleter', methods = ['GET','POST'])
-def autocompleter():
+@app.route('/autocomplete', methods = ['GET','POST'])
+def autocomplete():
     form = MyForm()
-    source = False
-    target = False
+    prompt = False
+    code = False
     print(form.validate_on_submit())
     if form.validate_on_submit():
-        source = form.source.data 
-        target = predict(source)
-        form.source.data = ""
-    return render_template('autocompleter.html', form=form, source=source, target=target)
+        prompt = form.prompt.data 
+        code = predict(prompt)
+        form.prompt.data = ""
+    return render_template('autocompleter.html', form=form, prompt=prompt, code=code)
 
 if __name__ == '__main__':
     app.run(debug=True)

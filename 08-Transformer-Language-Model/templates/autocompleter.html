@@ -11,16 +11,16 @@
     <div>
         <form action="{{url_for('autocompleter')}}" method="POST">
             {{form.csrf_token}}
-            {{form.source.label}}
-            {{form.source()}}
+            {{form.prompt.label}}
+            {{form.prompt()}}
             <br>
             {{form.submit()}}
         </form>
         <hr>
-        {% if source %}
-            Prompt  : {{source}}
+        {% if prompt %}
+            Prompt  : {{prompt}}
             <br>
-            Code : {{target}}
+            Code : {{Code}}
         {% else %}
             No result
         {% endif %}
