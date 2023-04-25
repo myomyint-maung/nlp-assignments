@@ -310,8 +310,7 @@ hid_dim    = 256
 dec_layers = 3               
 dec_heads  = 8
 dec_pf_dim = 512
-dec_dropout = 0.1     
-lr = 1e-3
+dec_dropout = 0.1
 
 model = Decoder(vocab_size, hid_dim, dec_layers, dec_heads, dec_pf_dim, dec_dropout, device, PAD_IDX).to(device)
 
@@ -359,6 +358,5 @@ def predict(prompt):
     max_seq_len = 10
     temperature = 0.5
     seed = 0
-    generation = generate(prompt, max_seq_len, temperature, model, tokenizer, 
-                          vocab, device, seed)
-    print(' '.join(generation))
+    generation = generate(prompt, max_seq_len, temperature, model, tokenizer, vocab, device, seed)
+    return print(' '.join(generation))
