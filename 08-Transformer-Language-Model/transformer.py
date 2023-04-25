@@ -362,7 +362,3 @@ def predict(prompt):
     generation = generate(prompt, max_seq_len, temperature, model, tokenizer, 
                           vocab, device, seed)
     print(str(temperature)+'\n'+' '.join(generation)+'\n')
-
-# Test the function for prediction
-prompt = 'from sklearn'
-print(predict(prompt))
